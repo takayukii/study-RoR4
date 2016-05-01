@@ -120,3 +120,6 @@ $ rails console
 
 [Rails コピペで作れるバッチファイル](http://qiita.com/Kaki_Shoichi/items/9f641bc030991c94d5e7)
 
+```
+$ rails runner Tasks::Wikipedia.crawl
+```
