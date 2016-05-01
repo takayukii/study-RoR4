@@ -72,7 +72,7 @@ class Tasks::Wikipedia
     links = nodes.map do |node|
       URI.parse(url.scheme + '://' + url.host + node.attribute('href'))
     end
-    links[0..2]
+    links[0..7]
   end
 
   def self.focus_geohack_page(doc)

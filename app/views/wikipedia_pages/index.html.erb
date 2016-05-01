@@ -1,10 +1,21 @@
-<div class="container">
+<%
+  locations = @wikipedia_pages.map do |page|
+    {
+      id: page.id,
+      name: page.name,
+      latitude: page.latitude,
+      longitude: page.longitude
+    }
+  end
+%>
+<script id="initial-data" data-json="<%= locations.to_json %>"></script>
+<div class="container wikipedia-pages">
 
   <h1>Listing Wikipedia Pages</h1>
   <hr>
 
   <% if notice %>
-  <p id="notice" class="alert alert-success"><%= notice %></p>
+  <p id="notice" class="alert"><%= notice %></p>
   <% end %>
 
   <div class="row">
@@ -18,7 +29,7 @@
         </thead>
         <tbody>
         <% @wikipedia_pages.each do |wikipedia_page| %>
-            <tr>
+            <tr id="<%= wikipedia_page.id %>" class="wikipedia-page">
               <td><a href="<%= wikipedia_page.url %>"><%= wikipedia_page.title %></a></td>
               <td><%= link_to 'Show', wikipedia_page %></td>
               <td><%= link_to 'Edit', edit_wikipedia_page_path(wikipedia_page) %></td>
@@ -34,6 +45,11 @@
       </table>
     </div>
     <div class="col-md-7">
+      <div class="wikipedia-map">
+        <div class="wikipedia-map__content">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

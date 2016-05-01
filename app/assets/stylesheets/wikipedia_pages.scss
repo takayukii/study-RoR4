@@ -1,3 +1,47 @@
 // Place all the styles related to the wikipedia_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wikipedia-pages {
+
+  $map-width: 500px;
+  $map-height: 500px;
+
+  .wikipedia-page--hover {
+    background: orange;
+  }
+
+  .wikipedia-page {
+    &:hover {
+      @extend .wikipedia-page--hover;
+    }
+  }
+
+  .wikipedia-map {
+    position: relative;
+    margin: auto;
+    width: $map-width;
+    height: $map-height;
+  }
+  .wikipedia-map__content {
+    width: $map-width;
+    height: $map-height;
+  }
+
+  .wikipedia-map__content--fixed {
+    position: fixed;
+    top: 20px;
+
+    @media screen and ( max-width : $screen-xs-max ) {
+      position: inherit;
+      top: inherit;
+    }
+  }
+
+  #map-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
