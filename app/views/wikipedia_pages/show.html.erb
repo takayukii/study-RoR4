@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_wikipedia_page_path(@wikipedia_page) %> |
+<%= link_to 'Back', wikipedia_pages_path %>
+
+<ul>
+  <% @wikipedia_page.attributes.each do |attribute| %>
+  <li><%= attribute[0] %>: <%= attribute[1] %></li>
+  <% end %>
+</ul>

@@ -1,7 +1,26 @@
-<h1>Wikipedia Pages</h1>
-<hr/>
-<ul>
-  <% @pages.each do |page| %>
-  <li><a href="<%= page.url %>"><%= page.title %></a></li>
-  <% end %>
-</ul>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Wikipedia Pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wikipedia_pages.each do |wikipedia_page| %>
+      <tr>
+        <td><a href="<%= wikipedia_page.url %>"><%= wikipedia_page.title %></a></td>
+        <td><%= link_to 'Show', wikipedia_page %></td>
+        <td><%= link_to 'Edit', edit_wikipedia_page_path(wikipedia_page) %></td>
+        <td><%= link_to 'Destroy', wikipedia_page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Wikipedia page', new_wikipedia_page_path %>
