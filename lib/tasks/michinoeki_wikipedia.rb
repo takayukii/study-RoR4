@@ -55,9 +55,9 @@ class Tasks::MichinoekiWikipedia
 
           self.process_michinoeki_page(doc, page.url)
 
-        elsif title.match(/GeoHack - (道の駅.+)/)
-
-          self.process_geohack_page(doc)
+        # elsif title.match(/GeoHack - (道の駅.+)/)
+        #
+        #   self.process_geohack_page(doc)
 
         end
       end
