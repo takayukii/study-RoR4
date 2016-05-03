@@ -53,7 +53,7 @@ config.vm.synced_folder './', '/share', :nfs => true
 $ bundle exec rails s -b 0.0.0.0
 ```
 
-## rails generate scaffold item
+## rails generate scaffold
 
 ```
 $ rails g scaffold wikipedia_page

@@ -1,0 +1,17 @@
+<%= form_for(@michinoeki_wikipedia_page) do |f| %>
+  <% if @michinoeki_wikipedia_page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@michinoeki_wikipedia_page.errors.count, "error") %> prohibited this michinoeki_wikipedia_page from being saved:</h2>
+
+      <ul>
+      <% @michinoeki_wikipedia_page.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

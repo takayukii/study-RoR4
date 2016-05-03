@@ -27,7 +27,7 @@
     }
   });
 
-  var $pages = $('.wikipedia-page');
+  var $pages = $('.michinoeki-wikipedia-page');
   $pages.hover(function (event) {
     var id = $(event.target).parent().attr('id');
     if (id) {
@@ -48,12 +48,12 @@
     }
   });
 
-  var $content = $('.wikipedia-map__content'), offset = $content.offset();
+  var $content = $('.michinoeki-wikipedia-map__content'), offset = $content.offset();
   $(window).scroll(function () {
     if($(window).scrollTop() > offset.top - 20) {
-      $content.addClass('wikipedia-map__content--fixed');
+      $content.addClass('michinoeki-wikipedia-map__content--fixed');
     } else {
-      $content.removeClass('wikipedia-map__content--fixed');
+      $content.removeClass('michinoeki-wikipedia-map__content--fixed');
     }
   });
 
@@ -70,11 +70,11 @@ function addMarker(station, map) {
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     marker.setIcon(getPinImage('yellow'));
-    $('#' + station.id).addClass('wikipedia-page--hover');
+    $('#' + station.id).addClass('michinoeki-wikipedia-page--hover');
   });
   google.maps.event.addListener(marker, 'mouseout', function() {
     marker.setIcon(getPinImage('blue'));
-    $('#' + station.id).removeClass('wikipedia-page--hover');
+    $('#' + station.id).removeClass('michinoeki-wikipedia-page--hover');
   });
   google.maps.event.addListener(marker, 'click', function() {
     $('html, body').animate({

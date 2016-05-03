@@ -1,0 +1,55 @@
+<%
+  locations = @michinoeki_wikipedia_pages.map do |page|
+    {
+        id: page.id,
+        name: page.name,
+        latitude: page.latitude,
+        longitude: page.longitude
+    }
+  end
+%>
+<script id="initial-data" data-json="<%= locations.to_json %>"></script>
+<div class="container michinoeki-wikipedia-pages">
+
+  <h1>Listing Michinoeki michinoeki-wikipedia Pages</h1>
+  <hr>
+
+  <% if notice %>
+      <p id="notice" class="alert"><%= notice %></p>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table">
+        <thead>
+        <tr>
+          <td>Title</td>
+          <td colspan="3">Operations</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @michinoeki_wikipedia_pages.each do |michinoeki_wikipedia_page| %>
+            <tr id="<%= michinoeki_wikipedia_page.id %>" class="michinoeki-wikipedia-page">
+              <td><a href="<%= michinoeki_wikipedia_page.url %>"><%= michinoeki_wikipedia_page.title %></a></td>
+              <td><%= link_to 'Show', michinoeki_wikipedia_page %></td>
+              <td><%= link_to 'Edit', edit_michinoeki_wikipedia_page_path(michinoeki_wikipedia_page) %></td>
+              <td><%= link_to 'Destroy', michinoeki_wikipedia_page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+        <tr>
+          <td colspan="4">
+            <%= link_to 'New michinoeki-wikipedia page', new_michinoeki_wikipedia_page_path %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <div class="michinoeki-wikipedia-map">
+        <div class="michinoeki-wikipedia-map__content">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

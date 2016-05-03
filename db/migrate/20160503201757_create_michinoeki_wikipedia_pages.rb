@@ -1,6 +1,6 @@
-class CreateWikipediaPages < ActiveRecord::Migration
+class CreateMichinoekiWikipediaPages < ActiveRecord::Migration
   def change
-    create_table :wikipedia_pages do |t|
+    create_table :michinoeki_wikipedia_pages do |t|
       t.string :title
       t.text :url
       t.string :name

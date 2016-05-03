@@ -1,34 +1,34 @@
-// Place all the styles related to the wikipedia_pages controller here.
+// Place all the styles related to the michinoeki_wikipedia_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.wikipedia-pages {
+.michinoeki-wikipedia-pages {
 
   $map-width: 500px;
   $map-height: 500px;
 
-  .wikipedia-page--hover {
+  .michinoeki-wikipedia-page--hover {
     background: orange;
   }
 
-  .wikipedia-page {
+  .michinoeki-wikipedia-page {
     &:hover {
-      @extend .wikipedia-page--hover;
+      @extend .michinoeki-wikipedia-page--hover;
     }
   }
 
-  .wikipedia-map {
+  .michinoeki-wikipedia-map {
     position: relative;
     margin: auto;
     width: $map-width;
     height: $map-height;
   }
-  .wikipedia-map__content {
+  .michinoeki-wikipedia-map__content {
     width: $map-width;
     height: $map-height;
   }
 
-  .wikipedia-map__content--fixed {
+  .michinoeki-wikipedia-map__content--fixed {
     position: fixed;
     top: 20px;
 
@@ -44,4 +44,3 @@
   }
 
 }
-

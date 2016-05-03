@@ -1,7 +1,7 @@
 require 'kconv'
 require 'pp'
 
-class Tasks::Wikipedia
+class Tasks::MichinoekiWikipedia
 
   # Crawl
   def self.crawl
@@ -84,9 +84,9 @@ class Tasks::Wikipedia
     title = doc.at('title').inner_html.to_s
     puts title
     matches = title.match(/(道の駅.+) - W+/)
-    wiki = WikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
+    wiki = MichinoekiWikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
     unless wiki
-      wiki = WikipediaPage.new
+      wiki = MichinoekiWikipediaPage.new
     end
 
     wiki.title = title
@@ -139,7 +139,7 @@ class Tasks::Wikipedia
   def self.process_geohack_page(doc)
     title = doc.at('title').inner_html.to_s
     matches = title.match(/GeoHack - (道の駅.+)/)
-    wiki = WikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
+    wiki = MichinoekiWikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
 
     wiki.longitude = doc.css('.geo > .longitude').inner_html.to_s
     wiki.latitude = doc.css('.geo > .latitude').inner_html.to_s
