@@ -20,7 +20,8 @@ class Tasks::MichinoekiWikipedia
 
     options = {
         :delay => 1,
-        :depth_limit => 2,
+        :depth_limit => 1,
+        # :depth_limit => 2,
     }
 
     Anemone.crawl(urls, options) do |anemone|
@@ -30,10 +31,11 @@ class Tasks::MichinoekiWikipedia
         doc = Nokogiri::HTML.parse(page.body.toutf8)
         title = doc.at('title').inner_html.to_s
 
+        links = []
         if title.match(/道の駅一覧/)
           links = self.focus_michinoeki_page(doc, page.url)
-        else
-          links = self.focus_geohack_page(doc)
+        # else
+        #   links = self.focus_geohack_page(doc)
         end
         links
       end
@@ -75,10 +77,10 @@ class Tasks::MichinoekiWikipedia
     links[0..7]
   end
 
-  def self.focus_geohack_page(doc)
-    url = doc.css('a.external.text').attribute('href')
-    [URI.parse("https:#{url}")]
-  end
+  # def self.focus_geohack_page(doc)
+  #   url = doc.css('a.external.text').attribute('href')
+  #   [URI.parse("https:#{url}")]
+  # end
 
   def self.process_michinoeki_page(doc, url)
     title = doc.at('title').inner_html.to_s
@@ -136,16 +138,16 @@ class Tasks::MichinoekiWikipedia
     wiki.save
   end
 
-  def self.process_geohack_page(doc)
-    title = doc.at('title').inner_html.to_s
-    matches = title.match(/GeoHack - (道の駅.+)/)
-    wiki = MichinoekiWikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
-
-    wiki.longitude = doc.css('.geo > .longitude').inner_html.to_s
-    wiki.latitude = doc.css('.geo > .latitude').inner_html.to_s
-
-    wiki.save
-  end
+  # def self.process_geohack_page(doc)
+  #   title = doc.at('title').inner_html.to_s
+  #   matches = title.match(/GeoHack - (道の駅.+)/)
+  #   wiki = MichinoekiWikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
+  #
+  #   wiki.longitude = doc.css('.geo > .longitude').inner_html.to_s
+  #   wiki.latitude = doc.css('.geo > .latitude').inner_html.to_s
+  #
+  #   wiki.save
+  # end
 
   def self.identify_address_fragment(doc)
     nodes = doc.css('table.infobox > tr')

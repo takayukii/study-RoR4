@@ -7,8 +7,8 @@ class CreateMichinoekiWikipediaPages < ActiveRecord::Migration
       t.string :phrase
       t.string :zip_code
       t.string :address
-      t.string :latitude
-      t.string :longitude
+      t.float :latitude
+      t.float :longitude
       t.text :description
       t.timestamps null: false
     end

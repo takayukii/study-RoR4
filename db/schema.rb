@@ -20,22 +20,8 @@ ActiveRecord::Schema.define(version: 20160503201757) do
     t.string   "phrase",      limit: 255
     t.string   "zip_code",    limit: 255
     t.string   "address",     limit: 255
-    t.string   "latitude",    limit: 255
-    t.string   "longitude",   limit: 255
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "wikipedia_pages", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "url",         limit: 65535
-    t.string   "name",        limit: 255
-    t.string   "phrase",      limit: 255
-    t.string   "zip_code",    limit: 255
-    t.string   "address",     limit: 255
-    t.string   "latitude",    limit: 255
-    t.string   "longitude",   limit: 255
+    t.float    "latitude",    limit: 24
+    t.float    "longitude",   limit: 24
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
