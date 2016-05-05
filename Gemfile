@@ -36,6 +36,8 @@ gem 'sanitize'
 gem 'bootstrap-sass'
 gem 'geocoder'
 gem 'dotenv-rails'
+gem 'poltergeist'
+gem 'selenium-webdriver'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
