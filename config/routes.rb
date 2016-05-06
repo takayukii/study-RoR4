@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bath_day_onsen_pages
   resources :michinoeki_wikipedia_pages
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

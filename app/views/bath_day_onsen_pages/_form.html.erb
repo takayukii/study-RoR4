@@ -1,0 +1,17 @@
+<%= form_for(@bath_day_onsen_page) do |f| %>
+  <% if @bath_day_onsen_page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bath_day_onsen_page.errors.count, "error") %> prohibited this bath_day_onsen_page from being saved:</h2>
+
+      <ul>
+      <% @bath_day_onsen_page.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

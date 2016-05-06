@@ -1,7 +1,7 @@
 (function () {
 
-  var isNotWikipediaPage = ! $('.michinoeki-wikipedia-pages').length;
-  if (isNotWikipediaPage) {
+  var isNotDayOnsenPage = ! $('.bath-day-onsen-pages').length;
+  if (isNotDayOnsenPage) {
     return;
   }
 
@@ -18,7 +18,7 @@
       var myLocation = results[0].geometry.location;
 
       map = new google.maps.Map(document.getElementById("map-canvas"), {
-        zoom: 7,
+        zoom: 10,
         center: myLocation,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
@@ -32,7 +32,7 @@
     }
   });
 
-  var $pages = $('.michinoeki-wikipedia-page');
+  var $pages = $('.bath-day-onsen-page');
   $pages.hover(function (event) {
     var id = $(event.target).parent().attr('id');
     if (id) {
@@ -53,12 +53,12 @@
     }
   });
 
-  var $content = $('.michinoeki-wikipedia-map__content'), offset = $content.offset();
+  var $content = $('.bath-day-onsen-map__content'), offset = $content.offset();
   $(window).scroll(function () {
     if($(window).scrollTop() > offset.top - 20) {
-      $content.addClass('michinoeki-wikipedia-map__content--fixed');
+      $content.addClass('bath-day-onsen-map__content--fixed');
     } else {
-      $content.removeClass('michinoeki-wikipedia-map__content--fixed');
+      $content.removeClass('bath-day-onsen-map__content--fixed');
     }
   });
 
@@ -73,11 +73,11 @@
 
     google.maps.event.addListener(marker, 'mouseover', function() {
       marker.setIcon(getPinImage('yellow'));
-      $('#' + station.id).addClass('michinoeki-wikipedia-page--hover');
+      $('#' + station.id).addClass('bath-day-onsen-page--hover');
     });
     google.maps.event.addListener(marker, 'mouseout', function() {
       marker.setIcon(getPinImage('blue'));
-      $('#' + station.id).removeClass('michinoeki-wikipedia-page--hover');
+      $('#' + station.id).removeClass('bath-day-onsen-page--hover');
     });
     google.maps.event.addListener(marker, 'click', function() {
       $('html, body').animate({
@@ -97,6 +97,6 @@
       scaledSize: new google.maps.Size(32, 32)
     };
   }
-
+  
 })();
 

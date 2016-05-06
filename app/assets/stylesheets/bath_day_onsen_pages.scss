@@ -1,0 +1,46 @@
+// Place all the styles related to the bath_day_onsen_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bath-day-onsen-pages {
+
+  $map-width: 500px;
+  $map-height: 500px;
+
+  .bath-day-onsen-page--hover {
+    background: orange;
+  }
+
+  .bath-day-onsen-page {
+    &:hover {
+      @extend .bath-day-onsen-page--hover;
+    }
+  }
+
+  .bath-day-onsen-map {
+    position: relative;
+    margin: auto;
+    width: $map-width;
+    height: $map-height;
+  }
+  .bath-day-onsen-map__content {
+    width: $map-width;
+    height: $map-height;
+  }
+
+  .bath-day-onsen-map__content--fixed {
+    position: fixed;
+    top: 20px;
+
+    @media screen and ( max-width : $screen-xs-max ) {
+      position: inherit;
+      top: inherit;
+    }
+  }
+
+  #map-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+}

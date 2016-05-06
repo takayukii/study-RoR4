@@ -12,20 +12,20 @@
 <div class="container michinoeki-wikipedia-pages">
 
   <h1>Listing Michinoeki Wikipedia Pages</h1>
-  <hr>
+  <hr/>
 
   <% if notice %>
-      <p id="notice" class="alert"><%= notice %></p>
+    <p id="notice" class="alert"><%= notice %></p>
   <% end %>
 
   <div class="row">
     <div class="col-md-5">
       <table class="table">
         <thead>
-        <tr>
-          <td>Title</td>
-          <td colspan="3">Operations</td>
-        </tr>
+          <tr>
+            <td>Title</td>
+            <td colspan="3">Operations</td>
+          </tr>
         </thead>
         <tbody>
         <% @michinoeki_wikipedia_pages.each do |michinoeki_wikipedia_page| %>

@@ -1,0 +1,53 @@
+<%
+  locations = @bath_day_onsen_pages.map do |page|
+    {
+        id: page.id,
+        name: page.name,
+        latitude: page.latitude,
+        longitude: page.longitude
+    }
+  end
+%>
+<script id="initial-data" data-json="<%= locations.to_json %>"></script>
+<div class="container bath-day-onsen-pages">
+  <% if notice %>
+    <p id="notice" class="alert"><%= notice %></p>
+  <% end %>
+
+  <h1>Listing Bath Day Onsen Pages</h1>
+  <hr/>
+
+  <div class="row">
+    <div class="col-md-5">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td colspan="3">Operations</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bath_day_onsen_pages.each do |bath_day_onsen_page| %>
+            <tr id="<%= bath_day_onsen_page.id %>" class="bath-day-onsen-page">
+              <td><a href="<%= bath_day_onsen_page.url %>"><%= bath_day_onsen_page.title %></a></td>
+              <td><%= link_to 'Show', bath_day_onsen_page %></td>
+              <td><%= link_to 'Edit', edit_bath_day_onsen_page_path(bath_day_onsen_page) %></td>
+              <td><%= link_to 'Destroy', bath_day_onsen_page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="4"><%= link_to 'New Bath day onsen page', new_bath_day_onsen_page_path %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <div class="bath-day-onsen-map">
+        <div class="bath-day-onsen-map__content">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
