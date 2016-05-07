@@ -56,13 +56,13 @@ ActiveRecord::Schema.define(version: 20160506121212) do
     t.text     "url",         limit: 65535
     t.string   "name",        limit: 255
     t.string   "phrase",      limit: 255
+    t.text     "description", limit: 4294967295
     t.string   "zip_code",    limit: 255
     t.string   "address",     limit: 255
     t.float    "latitude",    limit: 24
     t.float    "longitude",   limit: 24
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
 end

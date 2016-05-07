@@ -33,28 +33,46 @@ module Tasks
 
     def self.crawl
 
-      urls = self.fetch_bath_urls('道の駅アグリパークゆめすぎと')
+      michinoekis = MichinoekiWikipediaPage.all()
+      michinoekis = michinoekis[0..2]
+      michinoekis.each_slice(2) do |five_michinoekis|
+        michinoeki_names = five_michinoekis.map do |michinoeki|
+          michinoeki.name
+        end
+        puts michinoeki_names
+        self.crawl_by_michinoeki_names(michinoeki_names)
+      end
+    end
+
+    def self.crawl_by_michinoeki_names(michinoeki_names)
+      urls = michinoeki_names.map do |michinoeki_name|
+        self.fetch_bath_urls("#{michinoeki_name}")
+      end
+      puts urls
+      urls.flatten!
+      urls.uniq!
+
       options = {
-          :delay => 1,
+          :delay => 5,
           :depth_limit => 0
       }
-      puts urls
 
       Anemone.crawl(urls, options) do |anemone|
 
+        puts 'Anemone crawl'
+
         # Scraping HTML
         anemone.on_every_page do |page|
-
           doc = Nokogiri::HTML.parse(page.body.toutf8)
           self.process_day_onsen_page(doc, page.url)
         end
+
       end
     end
 
     def self.process_day_onsen_page(doc, url)
 
       title = doc.at('title').inner_html.to_s.strip
-      # エコ・スポいずみ（埼玉県北葛飾郡杉戸町）
       onsen = BathDayOnsenPage.where('url = ?', url).first
       unless onsen
         onsen = BathDayOnsenPage.new
@@ -120,6 +138,8 @@ module Tasks
 
     def self.fetch_bath_urls(michinoeki_name)
 
+      puts "Search bath by #{michinoeki_name}"
+
       links = []
       session = Capybara::Session.new(DRIVER)
       if DRIVER === :poltergeist
@@ -172,3 +192,5 @@ module Tasks
 
   end
 end
+
+# Tasks::BathDayOnsen.fetch_bath_urls('道の駅アグリパークゆめすぎと')

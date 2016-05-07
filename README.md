@@ -5,12 +5,12 @@
 [rails new 手順書](http://qiita.com/youcune/items/312178c54c65f3ab4d42)
 
 ```
-$ mkdir crawler
-$ cd crawler
+$ mkdir project
+$ cd project
 $ bundle init
 ```
 
-`Gemfile`
+Edit `Gemfile`
 
 ```
 # A sample Gemfile
@@ -19,8 +19,10 @@ source "https://rubygems.org"
 gem "rails"
 ```
 
+Install rails
+
 ```
-$ bundle install --path vendor/bundler --jobs=4
+$ bundle install --path vendor/bundle --jobs=4
 $ bundle exec rails new . --database=mysql
 ```
 
@@ -44,6 +46,8 @@ development:
 
 ## rails server
 
+Rails is very slow, unless Vagrant scynced_folder has been configured with NFS..
+
 ```
 # Vagrantfile
 config.vm.synced_folder './', '/share', :nfs => true
@@ -55,8 +59,10 @@ $ bundle exec rails s -b 0.0.0.0
 
 ## rails generate scaffold
 
+You should `rails g scaffold xxx` with database columns (e.g. name:string price:integer) if you want to create CRUD. Without columns, generated views are all empty.  
+
 ```
-$ rails g scaffold wikipedia_page
+$ rails g scaffold item name:string price:integer
 ```
 
 Able to use --force option if files already existing
@@ -67,23 +73,7 @@ Able to use --force option if files already existing
 $ rails generate controller home
 ```
 
-generates controller, view, test, coffee, scss..
-
-## rake db:migrate
-
-```
-$ rails generate migration create_wikipedia_pages // NOTE: generate model automatically creates migration!
-```
-
-```
-$ rake db:migrate
-```
-
-```
-$ rake db:rollback
-```
-
-[create_table - Railsドキュメント](http://railsdoc.com/references/create_table)
+generates controller, view, test, coffee, scss.. Note it includes view related files too.
 
 ## rails generate model
 
@@ -92,6 +82,8 @@ $ rails generate model wikipedia_page
 ```
 
 generates migration, model, test, fixtures
+
+You can operate your Model interactively via console.
 
 ```
 $ rails console
@@ -124,10 +116,53 @@ $ rails console
  => #<WikipediaPage id: 1, title: "test1", url: "http://test1.com", body: "<h1>body..</h1>", station_name: nil, address: nil, created_at: "2016-04-30 15:18:35", updated_at: "2016-04-30 15:18:35"> 
 ```
 
+## rake db:migrate
+
+```
+$ rails generate migration create_wikipedia_pages // NOTE: generate model automatically creates migration!
+```
+
+```
+$ rake db:migrate
+```
+
+```
+$ rake db:rollback
+```
+
+[create_table - Railsドキュメント](http://railsdoc.com/references/create_table)
+
 ## rails runner
 
 [Rails コピペで作れるバッチファイル](http://qiita.com/Kaki_Shoichi/items/9f641bc030991c94d5e7)
 
 ```
-$ rails runner Tasks::Wikipedia.crawl
+$ rails runner Tasks::ATask.execute
+```
+
+## Geocoder 
+
+Very useful gem which is well integrated with Rails.
+
+https://github.com/alexreisner/geocoder
+
+After gem install and `rails g geocoder:config`, you can configure parameters in `config/initializers/geocoder.rb`
+
+```
+$ rails generate geocoder:config
+```
+
+In Model, 
+
+```
+class AModel < ActiveRecord::Base
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
+end
+```
+
+Also, you can execute batch geocode
+
+```
+$  rake geocode:all CLASS=AModel
 ```

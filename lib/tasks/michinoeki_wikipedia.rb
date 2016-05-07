@@ -6,20 +6,23 @@ class Tasks::MichinoekiWikipedia
   # Crawl
   def self.crawl
 
+    # urls = %w(
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%8C%97%E6%B5%B7%E9%81%93%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E6%9D%B1%E5%8C%97%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E9%96%A2%E6%9D%B1%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B8%AD%E9%83%A8%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%8C%97%E9%99%B8%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E8%BF%91%E7%95%BF%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B8%AD%E5%9B%BD%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%9B%9B%E5%9B%BD%E5%9C%B0%E6%96%B9
+    #     https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B9%9D%E5%B7%9E%E5%9C%B0%E6%96%B9
+    # )
     urls = %w(
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%8C%97%E6%B5%B7%E9%81%93%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E6%9D%B1%E5%8C%97%E5%9C%B0%E6%96%B9
         https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E9%96%A2%E6%9D%B1%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B8%AD%E9%83%A8%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%8C%97%E9%99%B8%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E8%BF%91%E7%95%BF%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B8%AD%E5%9B%BD%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E5%9B%9B%E5%9B%BD%E5%9C%B0%E6%96%B9
-        https://ja.wikipedia.org/wiki/%E9%81%93%E3%81%AE%E9%A7%85%E4%B8%80%E8%A6%A7_%E4%B9%9D%E5%B7%9E%E5%9C%B0%E6%96%B9
     )
 
     options = {
-        :delay => 1,
+        :delay => 5,
         :depth_limit => 1,
         # :depth_limit => 2,
     }
@@ -45,7 +48,6 @@ class Tasks::MichinoekiWikipedia
 
         doc = Nokogiri::HTML.parse(page.body.toutf8)
         title = doc.at('title').inner_html.to_s
-        puts "process #{title}"
 
         if title.match(/道の駅一覧/)
           next
@@ -74,7 +76,7 @@ class Tasks::MichinoekiWikipedia
     links = nodes.map do |node|
       URI.parse(url.scheme + '://' + url.host + node.attribute('href'))
     end
-    links[0..7]
+    links
   end
 
   # def self.focus_geohack_page(doc)
@@ -84,7 +86,6 @@ class Tasks::MichinoekiWikipedia
 
   def self.process_michinoeki_page(doc, url)
     title = doc.at('title').inner_html.to_s
-    puts title
     matches = title.match(/(道の駅.+) - W+/)
     wiki = MichinoekiWikipediaPage.where('title LIKE ?', "%#{matches[1]}%").first
     unless wiki
@@ -110,7 +111,7 @@ class Tasks::MichinoekiWikipedia
     end
 
     if wiki.name == ''
-      matches = wiki.title.match(/道の駅([^ ]+) -.*/)
+      matches = wiki.title.match(/道の駅(.+) -.*/)
       puts "No name retrieved, so filled with title #{wiki.title}"
       if matches.length > 1
         wiki.name = matches[1]
