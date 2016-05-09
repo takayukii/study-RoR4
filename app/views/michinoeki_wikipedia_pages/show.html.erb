@@ -1,4 +1,58 @@
-<p id="notice"><%= notice %></p>
+<%
+  locations = @bath_day_onsen_pages.map do |page|
+    {
+        id: page.id,
+        name: page.name,
+        latitude: page.latitude,
+        longitude: page.longitude
+    }
+  end
+  data = {
+      :name => @michinoeki_wikipedia_page.name,
+      :locations => locations
+  }
+%>
+<script id="initial-data" data-json="<%= data.to_json %>"></script>
+<div class="container michinoeki-wikipedia-pages michinoeki-wikipedia-pages-show">
 
-<%= link_to 'Edit', edit_michinoeki_wikipedia_page_path(@michinoeki_wikipedia_page) %> |
-<%= link_to 'Back', michinoeki_wikipedia_pages_path %>
+  <h1>道の駅 <%= @michinoeki_wikipedia_page.name %></h1>
+  <hr/>
+
+  <% if notice %>
+    <p id="notice" class="alert"><%= notice %></p>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <% @michinoeki_wikipedia_page.attributes.each do |attribute| %>
+          <% if attribute[0] == 'description' %>
+              <p>
+                <strong><%= attribute[0] %>:</strong>
+                <%= raw(attribute[1]) %>
+              </p>
+          <% else %>
+              <p>
+                <strong><%= attribute[0] %>:</strong>
+                <%= attribute[1] %>
+              </p>
+          <% end %>
+      <% end %>
+      <ul>
+        <% @bath_day_onsen_pages.each do |onsen| %>
+        <li id="<%= onsen.id %>" class="michinoeki-wikipedia-pages-show__page">
+          <%= link_to "#{onsen.name} - #{onsen.distance.round(1)} km, #{onsen.bearing}", bath_day_onsen_page_path(onsen) %>
+        </li>
+        <% end %>
+      </ul>
+      <%= link_to 'Edit', edit_michinoeki_wikipedia_page_path(@michinoeki_wikipedia_page) %> |
+      <%= link_to 'Back', michinoeki_wikipedia_pages_path %>
+    </div>
+    <div class="col-md-7">
+      <div class="michinoeki-wikipedia-pages-show__map">
+        <div class="michinoeki-wikipedia-pages-show__map-content">
+          <div id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

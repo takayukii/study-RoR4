@@ -140,6 +140,23 @@ $ rake db:rollback
 $ rails runner Tasks::ATask.execute
 ```
 
+## Remote Debug with IDEA
+
+Gems required
+
+```
+gem 'ruby-debug-ide'
+gem 'debase'
+```
+
+Firstly, run rails server with command below. Note that debug session in IDEA has stopped.
+
+```
+$ rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails s -b 0.0.0.0
+```
+
+Then press debug button in IDEA to start debug session.
+
 ## Geocoder 
 
 Very useful gem which is well integrated with Rails.
@@ -166,3 +183,19 @@ Also, you can execute batch geocode
 ```
 $  rake geocode:all CLASS=AModel
 ```
+
+## Debug Toolbar / Rails Panel
+
+[Rails 開発をサポートするChrome拡張 Rails Panel の機能と仕組み](http://blog.chopschips.net/blog/2015/03/06/rails-panel/)
+
+## link_to
+
+[Rails でリンクパスを生成する方法色々・・とRails console で 生成される path を確認したい時](http://qiita.com/mm36/items/f266977e12df9d1dc548)
+
+Check path name
+
+```
+$ rake routes
+```
+
+link_to {Prefix}_path would work in views

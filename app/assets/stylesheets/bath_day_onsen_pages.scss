@@ -7,28 +7,28 @@
   $map-width: 500px;
   $map-height: 500px;
 
-  .bath-day-onsen-page--hover {
+  .bath-day-onsen-pages-index__page--hover {
     background: orange;
   }
 
-  .bath-day-onsen-page {
+  .bath-day-onsen-pages-index__page {
     &:hover {
-      @extend .bath-day-onsen-page--hover;
+      @extend .bath-day-onsen-pages-index__page--hover;
     }
   }
 
-  .bath-day-onsen-map {
+  .bath-day-onsen-pages-index__map {
     position: relative;
     margin: auto;
     width: $map-width;
     height: $map-height;
   }
-  .bath-day-onsen-map__content {
+  .bath-day-onsen-pages-index__map-content {
     width: $map-width;
     height: $map-height;
   }
 
-  .bath-day-onsen-map__content--fixed {
+  .bath-day-onsen-pages-index__map-content--fixed {
     position: fixed;
     top: 20px;
 

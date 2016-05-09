@@ -7,28 +7,33 @@
   $map-width: 500px;
   $map-height: 500px;
 
-  .michinoeki-wikipedia-page--hover {
+  #map-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .michinoeki-wikipedia-pages-index__page--hover {
     background: orange;
   }
 
-  .michinoeki-wikipedia-page {
+  .michinoeki-wikipedia-pages-index__page {
     &:hover {
-      @extend .michinoeki-wikipedia-page--hover;
+      @extend .michinoeki-wikipedia-pages-index__page--hover;
     }
   }
 
-  .michinoeki-wikipedia-map {
+  .michinoeki-wikipedia-pages-index__map {
     position: relative;
     margin: auto;
     width: $map-width;
     height: $map-height;
   }
-  .michinoeki-wikipedia-map__content {
+  .michinoeki-wikipedia-pages-index__map-content {
     width: $map-width;
     height: $map-height;
   }
 
-  .michinoeki-wikipedia-map__content--fixed {
+  .michinoeki-wikipedia-pages-index__map-content--fixed {
     position: fixed;
     top: 20px;
 
@@ -38,9 +43,35 @@
     }
   }
 
-  #map-canvas {
-    width: 100%;
-    height: 100%;
+  .michinoeki-wikipedia-pages-show__page--hover {
+    background: orange;
+  }
+
+  .michinoeki-wikipedia-pages-show__page {
+    &:hover {
+      @extend .michinoeki-wikipedia-pages-show__page--hover;
+    }
+  }
+
+  .michinoeki-wikipedia-pages-show__map {
+    position: relative;
+    margin: auto;
+    width: $map-width;
+    height: $map-height;
+  }
+  .michinoeki-wikipedia-pages-show__map-content {
+    width: $map-width;
+    height: $map-height;
+  }
+
+  .michinoeki-wikipedia-pages-show__map-content--fixed {
+    position: fixed;
+    top: 20px;
+
+    @media screen and ( max-width : $screen-xs-max ) {
+      position: inherit;
+      top: inherit;
+    }
   }
 
 }

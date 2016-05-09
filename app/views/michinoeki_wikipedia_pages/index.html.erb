@@ -9,7 +9,7 @@
   end
 %>
 <script id="initial-data" data-json="<%= locations.to_json %>"></script>
-<div class="container michinoeki-wikipedia-pages">
+<div class="container michinoeki-wikipedia-pages michinoeki-wikipedia-pages-index">
 
   <h1>Listing Michinoeki Wikipedia Pages</h1>
   <hr/>
@@ -29,7 +29,7 @@
         </thead>
         <tbody>
         <% @michinoeki_wikipedia_pages.each do |michinoeki_wikipedia_page| %>
-            <tr id="<%= michinoeki_wikipedia_page.id %>" class="michinoeki-wikipedia-page">
+            <tr id="<%= michinoeki_wikipedia_page.id %>" class="michinoeki-wikipedia-pages-index__page">
               <td><a href="<%= michinoeki_wikipedia_page.url %>"><%= michinoeki_wikipedia_page.title %></a></td>
               <td><%= link_to 'Show', michinoeki_wikipedia_page %></td>
               <td><%= link_to 'Edit', edit_michinoeki_wikipedia_page_path(michinoeki_wikipedia_page) %></td>
@@ -45,8 +45,8 @@
       </table>
     </div>
     <div class="col-md-7">
-      <div class="michinoeki-wikipedia-map">
-        <div class="michinoeki-wikipedia-map__content">
+      <div class="michinoeki-wikipedia-pages-index__map">
+        <div class="michinoeki-wikipedia-pages-index__map-content">
           <div id="map-canvas"></div>
         </div>
       </div>

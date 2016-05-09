@@ -10,6 +10,9 @@ class MichinoekiWikipediaPagesController < ApplicationController
   # GET /michinoeki_wikipedia_pages/1
   # GET /michinoeki_wikipedia_pages/1.json
   def show
+    lat = @michinoeki_wikipedia_page.latitude
+    lng = @michinoeki_wikipedia_page.longitude
+    @bath_day_onsen_pages = BathDayOnsenPage.near([lat, lng], 10, :units => :km)
   end
 
   # GET /michinoeki_wikipedia_pages/new
